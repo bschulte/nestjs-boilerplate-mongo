@@ -1,0 +1,23 @@
+scalar Date
+
+type User {
+  id: ID!
+  email: String!
+  group: String!
+  createdAt: Date!
+  updatedAt: Date!
+  lastLogin: Date
+  loginAttempts: Int!
+  roles: [Role]
+  configSettings: [UserConfig]
+  loginRecords: [LoginRecord]
+  notifications: [NotificationStatus]
+}
+
+type Query {
+  user: User
+}
+
+type Mutation {
+  createUser(email: String!, password: String!): User
+}

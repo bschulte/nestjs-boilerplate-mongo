@@ -1,0 +1,8 @@
+type LoginResponse {
+  expiresIn: String!
+  accessToken: String!
+}
+
+type Mutation {
+  login(email: String!, password: String!): LoginResponse
+}
