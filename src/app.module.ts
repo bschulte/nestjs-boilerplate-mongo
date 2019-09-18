@@ -6,7 +6,10 @@ import { UserModule } from 'modules/user/user.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost/nest-boilerplate'),
+    MongooseModule.forRoot('mongodb://localhost/nest-boilerplate', {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }),
     AuthModule,
     UserModule,
   ],
