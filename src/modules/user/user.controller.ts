@@ -8,11 +8,11 @@ import {
 } from '@nestjs/common';
 // import { AuthGuard } from '@nestjs/passport';
 
-import { BackendLogger } from 'src/modules/logger/BackendLogger';
+import { BackendLogger } from 'modules/logger/BackendLogger';
 import { UserDto } from './dtos/user.dto';
 import { UserService } from './user.service';
 // import { RolesGuard } from 'src/role/guards/roles.guard';
-import { roles } from 'src/common/constants';
+import { roles } from 'common/constants';
 // import { Roles } from 'src/role/decorators/roles.decorator';
 // import { JwtAuthGuard } from 'src/auth/guards/jwtAuth.guard';
 

@@ -1,10 +1,10 @@
 import {
   ExecutionContext,
   Injectable,
-  UnauthorizedException
+  UnauthorizedException,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { BackendLogger } from 'src/logger/BackendLogger';
+import { BackendLogger } from 'modules/logger/BackendLogger';
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
@@ -20,7 +20,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   handleRequest(err, user, info) {
     if (err || !user) {
       this.logger.debug(
-        `Invalid/expired access for user: ${JSON.stringify(user)}`
+        `Invalid/expired access for user: ${JSON.stringify(user)}`,
       );
       throw err || new UnauthorizedException();
     }

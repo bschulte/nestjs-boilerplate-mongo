@@ -7,12 +7,12 @@ import {
   ResolveProperty,
   Resolver,
 } from '@nestjs/graphql';
-import { BackendLogger } from 'src/modules/logger/BackendLogger';
+import { BackendLogger } from 'modules/logger/BackendLogger';
 // import { GqlAuthGuard } from 'src/auth/guards/graphqlAuth.guard';
 // import { GqlRolesGuard } from 'src/role/guards/graphqlRoles.guard';
 // import { LoginRecordService } from 'src/loginRecord/loginRecord.service';
 // import { Roles } from 'src/role/decorators/roles.decorator';
-import { roles } from 'src/common/constants';
+import { roles } from 'common/constants';
 // import { RoleService } from 'src/role/role.service';
 import { UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';

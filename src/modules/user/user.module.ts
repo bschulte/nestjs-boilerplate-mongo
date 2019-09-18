@@ -7,17 +7,19 @@ import { UserResolver } from './user.resolver';
 // import { UserConfigModule } from 'src/userConfig/userConfig.module';
 // import { LoginRecordModule } from 'src/loginRecord/loginRecord.module';
 // import { NotificationStatusModule } from 'src/notificationStatus/notificationStatus.module';
-import { UserCommand } from './user.command';
+import { MongooseModule } from '@nestjs/mongoose';
+import { UserSchema } from 'modules/user/user.schema';
 
 @Module({
   imports: [
+    MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
     // RoleModule,
     // UserConfigModule,
     // forwardRef(() => LoginRecordModule),
     // NotificationStatusModule,
   ],
   controllers: [UserController],
-  providers: [UserService, UserResolver, UserCommand],
+  providers: [UserService, UserResolver],
   exports: [UserService],
 })
 export class UserModule {}

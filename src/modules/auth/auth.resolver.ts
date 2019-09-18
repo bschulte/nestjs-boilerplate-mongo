@@ -1,7 +1,7 @@
 import { Resolver, Mutation, Args, Context } from '@nestjs/graphql';
-import { BackendLogger } from 'src/modules/logger/BackendLogger';
+import { BackendLogger } from 'modules/logger/BackendLogger';
 import { AuthService } from './auth.service';
-import { UserService } from 'src/modules/user/user.service';
+import { UserService } from 'modules/user/user.service';
 // import { LoginRecordService } from 'src/loginRecord/loginRecord.service';
 
 @Resolver('Auth')

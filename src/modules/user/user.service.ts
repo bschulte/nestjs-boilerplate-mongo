@@ -2,10 +2,10 @@ import { Injectable } from '@nestjs/common';
 import * as dayjs from 'dayjs';
 
 import { UserDto } from './dtos/user.dto';
-import { BackendLogger } from 'src/modules/logger/BackendLogger';
+import { BackendLogger } from 'modules/logger/BackendLogger';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { IUser } from 'src/modules/user/user.interface';
+import { IUser } from 'modules/user/user.interface';
 
 @Injectable()
 export class UserService {

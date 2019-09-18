@@ -3,10 +3,10 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 
 import { JwtPayload } from './interfaces/jwtPayload.interface';
-import { BackendLogger } from 'src/modules/logger/BackendLogger';
-import { UserService } from 'src/modules/user/user.service';
-import { IUser } from 'src/modules/user/user.interface';
-import { TOKEN_EXPIRES_IN } from 'src/common/constants';
+import { BackendLogger } from 'modules/logger/BackendLogger';
+import { UserService } from 'modules/user/user.service';
+import { IUser } from 'modules/user/user.interface';
+import { TOKEN_EXPIRES_IN } from 'common/constants';
 
 @Injectable()
 export class AuthService {

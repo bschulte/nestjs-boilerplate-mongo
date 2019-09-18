@@ -1,7 +1,7 @@
 import { Injectable, ExecutionContext } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { GqlExecutionContext } from '@nestjs/graphql';
-import { BackendLogger } from 'src/logger/BackendLogger';
+import { BackendLogger } from 'modules/logger/BackendLogger';
 
 @Injectable()
 export class GqlAuthGuard extends AuthGuard('jwt') {
@@ -15,7 +15,7 @@ export class GqlAuthGuard extends AuthGuard('jwt') {
     this.logger.debug(
       `GraphQL ${info.operation.operation}, Field: ${
         info.fieldName
-      }, Args: ${JSON.stringify(args)}`
+      }, Args: ${JSON.stringify(args)}`,
     );
     return ctx.getContext().req;
   }

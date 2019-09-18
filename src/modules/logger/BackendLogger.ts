@@ -2,19 +2,20 @@ import * as dayjs from 'dayjs';
 import * as winston from 'winston';
 import chalk from 'chalk';
 import { Logger } from '@nestjs/common';
-import { REQUEST_ID, SESSION_USER } from '../common/constants';
-import { SessionMiddleware } from '../common/middleware/session.middleware';
-import { User } from 'src/user/user.entity';
+import { REQUEST_ID, SESSION_USER } from 'common/constants';
+import { SessionMiddleware } from 'middleware/session.middleware';
 
-const formatter = (info) => {
+import { IUser } from 'modules/user/user.interface';
+
+const formatter = info => {
   const requestId = SessionMiddleware.get(REQUEST_ID) || '-';
-  const user: User = SessionMiddleware.get(SESSION_USER);
+  const user: IUser = SessionMiddleware.get(SESSION_USER);
   const email = user ? user.email : '-';
 
   return `${dayjs(info.timestamp).format(
-    'YYYY/MM/DD - hh:mm:ss.SSS A'
+    'YYYY/MM/DD - hh:mm:ss.SSS A',
   )} ${chalk.magentaBright(requestId)} ${email} [${info.level}] [${chalk.green(
-    info.context
+    info.context,
   )}] ${info.message}`;
 };
 
@@ -22,7 +23,7 @@ const customFormat = winston.format.combine(
   winston.format.colorize(),
   winston.format.timestamp(),
   winston.format.prettyPrint(),
-  winston.format.printf((info) => formatter(info))
+  winston.format.printf(info => formatter(info)),
 );
 
 export class BackendLogger extends Logger {
@@ -35,14 +36,14 @@ export class BackendLogger extends Logger {
         tailable: true,
         level: 'verbose',
         maxFiles: 10,
-        maxsize: 5 * 1024 * 1024 // 5 MB
+        maxsize: 5 * 1024 * 1024, // 5 MB
       }),
       new winston.transports.File({
         filename: 'logs/serverAll.tail.log',
         tailable: true,
         level: 'silly',
         maxFiles: 10,
-        maxsize: 5 * 1024 * 1024 // 5 MB
+        maxsize: 5 * 1024 * 1024, // 5 MB
       }),
       new winston.transports.File({
         filename: 'logs/server.log',
@@ -50,7 +51,7 @@ export class BackendLogger extends Logger {
         tailable: false,
         level: 'verbose',
         maxFiles: 10,
-        maxsize: 5 * 1024 * 1024 // 5 MB
+        maxsize: 5 * 1024 * 1024, // 5 MB
       }),
       new winston.transports.File({
         filename: 'logs/serverAll.log',
@@ -58,9 +59,9 @@ export class BackendLogger extends Logger {
         tailable: false,
         level: 'silly',
         maxFiles: 10,
-        maxsize: 5 * 1024 * 1024 // 5 MB
-      })
-    ]
+        maxsize: 5 * 1024 * 1024, // 5 MB
+      }),
+    ],
   });
 
   private ctx: string;
@@ -99,13 +100,13 @@ export class BackendLogger extends Logger {
   winstonLog(
     message: string,
     level: 'silly' | 'verbose' | 'debug' | 'warn' | 'error',
-    trace?: string
+    trace?: string,
   ) {
     BackendLogger.winstonLogger.log({
       level,
       message,
       trace,
-      context: this.ctx
+      context: this.ctx,
     });
   }
 }

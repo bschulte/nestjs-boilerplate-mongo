@@ -1,11 +1,11 @@
 import { AuthService } from './auth.service';
-import { BackendLogger } from 'src/modules/logger/BackendLogger';
+import { BackendLogger } from 'modules/logger/BackendLogger';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtPayload } from './interfaces/jwtPayload.interface';
 import { PassportStrategy } from '@nestjs/passport';
-import { SESSION_USER } from 'src/common/constants';
-import { SessionMiddleware } from 'src/middleware/session.middleware';
+import { SESSION_USER } from 'common/constants';
+import { SessionMiddleware } from 'middleware/session.middleware';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
