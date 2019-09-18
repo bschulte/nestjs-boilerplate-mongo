@@ -9,6 +9,7 @@ import { UserResolver } from './user.resolver';
 // import { NotificationStatusModule } from 'src/notificationStatus/notificationStatus.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserSchema } from 'modules/user/user.schema';
+import { UserConsole } from 'modules/user/user.console';
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { UserSchema } from 'modules/user/user.schema';
     // NotificationStatusModule,
   ],
   controllers: [UserController],
-  providers: [UserService, UserResolver],
-  exports: [UserService],
+  providers: [UserService, UserResolver, UserConsole],
+  exports: [UserService, UserConsole],
 })
 export class UserModule {}
