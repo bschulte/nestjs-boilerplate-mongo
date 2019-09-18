@@ -14,15 +14,26 @@ export class UserService {
   constructor(@InjectModel('User') private readonly userModel: Model<IUser>) {}
 
   async findOneByEmail(email: string) {
-    return await this.userModel.findOne({
-      where: { email },
-      relations: ['roles'],
-    });
+    return await this.userModel.findOne({ email });
+  }
+
+  async findOneById(id: string) {
+    return await this.userModel.findById(id);
+  }
+
+  async findAll() {
+    return await this.userModel.find();
   }
 
   async create(createUserDto: UserDto): Promise<IUser> {
     const newUser = new this.userModel(createUserDto);
     return await newUser.save();
+  }
+
+  async changePass(id: string, newPass: string) {
+    const user = await this.findOneById(id);
+    user.password = newPass;
+    return await user.save();
   }
 
   async handleInvalidPassword(user: IUser) {

@@ -36,4 +36,32 @@ export class UserConsole {
 
     process.exit();
   }
+
+  @Command({
+    command: 'change-pass',
+    description: 'Change a user password',
+  })
+  async changePass() {
+    const users = await this.userService.findAll();
+
+    const { id } = await prompt({
+      type: 'autocomplete',
+      name: 'id',
+      message: 'Select user',
+      choices: users.map(user => ({ title: user.email, value: user.id })),
+    });
+
+    const { newPass } = await prompt({
+      type: 'text',
+      name: 'newPass',
+      message: 'New password',
+    });
+
+    const modifiedUser = await this.userService.changePass(id, newPass);
+    console.log(
+      `Changed password for user: ${chalk.green(modifiedUser.email)}`,
+    );
+
+    process.exit();
+  }
 }
