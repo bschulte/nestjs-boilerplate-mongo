@@ -1,6 +1,8 @@
 import * as mongoose from 'mongoose';
 import * as bcryptjs from 'bcryptjs';
 
+import { RoleSchema } from 'modules/role/role.schema';
+
 export const UserSchema = new mongoose.Schema({
   email: String,
   password: String,
@@ -12,6 +14,7 @@ export const UserSchema = new mongoose.Schema({
   group: String,
   resetToken: String,
   resetTokenExpires: Date,
+  roles: [RoleSchema],
 });
 
 UserSchema.pre('save', function(next) {

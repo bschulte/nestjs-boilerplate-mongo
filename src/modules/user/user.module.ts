@@ -21,6 +21,6 @@ import { UserConsole } from 'modules/user/user.console';
   ],
   controllers: [UserController],
   providers: [UserService, UserResolver, UserConsole],
-  exports: [UserService, UserConsole],
+  exports: [UserService],
 })
 export class UserModule {}

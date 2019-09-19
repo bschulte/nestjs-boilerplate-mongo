@@ -60,6 +60,12 @@ export class BootstrapConsole {
       this.bootstrapFile(fileToCreate, fileName, className, baseDir);
     });
 
+    console.log(
+      `${chalk.red(
+        "Don't forget!",
+      )} Make sure to add the new module to app.module.ts if needed.`,
+    );
+
     process.exit();
   }
 

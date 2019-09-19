@@ -1,4 +1,5 @@
 import { Document } from 'mongoose';
+import { IRole } from 'modules/role/role.interface';
 
 export interface IUser extends Document {
   readonly name: string;
@@ -12,4 +13,5 @@ export interface IUser extends Document {
   group: string;
   resetToken: string;
   resetTokenExpires: Date;
+  roles: IRole[];
 }

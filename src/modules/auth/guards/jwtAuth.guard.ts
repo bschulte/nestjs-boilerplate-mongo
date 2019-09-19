@@ -12,7 +12,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
 
   canActivate(context: ExecutionContext) {
     const req = context.switchToHttp().getRequest();
-    this.logger.debug(` REST ${req.method}, Path: ${req.path}`);
+    this.logger.debug(`REST ${req.method}, Path: ${req.path}`);
 
     return super.canActivate(context);
   }

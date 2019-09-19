@@ -1,0 +1,8 @@
+type Role {
+  name: String!
+  enabled: Boolean!
+}
+
+type Mutation {
+  createRole(name: String!, enabled: Boolean): Role
+}

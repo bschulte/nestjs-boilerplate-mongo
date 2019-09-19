@@ -8,10 +8,10 @@ import {
   Resolver,
 } from '@nestjs/graphql';
 import { BackendLogger } from 'modules/logger/BackendLogger';
-// import { GqlAuthGuard } from 'src/auth/guards/graphqlAuth.guard';
-// import { GqlRolesGuard } from 'src/role/guards/graphqlRoles.guard';
+import { GqlAuthGuard } from 'modules/auth/guards/graphqlAuth.guard';
+import { GqlRolesGuard } from 'modules/role/guards/graphqlRoles.guard';
 // import { LoginRecordService } from 'src/loginRecord/loginRecord.service';
-// import { Roles } from 'src/role/decorators/roles.decorator';
+import { Roles } from 'modules/role/decorators/roles.decorator';
 import { roles } from 'common/constants';
 // import { RoleService } from 'src/role/role.service';
 import { UseGuards } from '@nestjs/common';
@@ -19,7 +19,7 @@ import { UserService } from './user.service';
 // import { NotificationStatusService } from 'src/notificationStatus/notificationStatus.service';
 
 @Resolver('User')
-// @UseGuards(GqlAuthGuard, GqlRolesGuard)
+@UseGuards(GqlAuthGuard, GqlRolesGuard)
 export class UserResolver {
   private readonly logger = new BackendLogger(UserResolver.name);
 
