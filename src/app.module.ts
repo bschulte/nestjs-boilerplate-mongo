@@ -6,6 +6,7 @@ dotenv.config();
 
 import { AuthModule } from 'modules/auth/auth.module';
 import { UserModule } from 'modules/user/user.module';
+import { BootstrapModule } from 'modules/bootstrap/bootstrap.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { UserModule } from 'modules/user/user.module';
     }),
     AuthModule,
     UserModule,
+    BootstrapModule,
   ],
   controllers: [],
   providers: [],

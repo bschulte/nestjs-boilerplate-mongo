@@ -4,7 +4,6 @@ import chalk from 'chalk';
 
 import { Inject, Injectable } from '@nestjs/common';
 import { UserService } from 'modules/user/user.service';
-import { BackendLogger } from 'modules/logger/BackendLogger';
 import { randomStr } from 'common/util';
 
 @Console({
@@ -12,8 +11,6 @@ import { randomStr } from 'common/util';
   description: 'Commands to work with users',
 })
 export class UserConsole {
-  private readonly logger = new BackendLogger(UserConsole.name);
-
   constructor(private readonly userService: UserService) {}
 
   @Command({

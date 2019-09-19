@@ -55,6 +55,7 @@
     "reflect-metadata": "^0.1.12",
     "rimraf": "^2.6.2",
     "rxjs": "^6.3.3",
+    "source-map-support": "^0.5.13",
     "uniqid": "^5.0.3",
     "winston": "^3.2.1"
   },
