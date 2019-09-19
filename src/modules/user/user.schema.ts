@@ -3,19 +3,20 @@ import * as bcryptjs from 'bcryptjs';
 
 import { RoleSchema } from 'modules/role/role.schema';
 
-export const UserSchema = new mongoose.Schema({
-  email: String,
-  password: String,
-  createdAt: Date,
-  updatedAt: Date,
-  lastLogin: Date,
-  loginAttempts: Number,
-  locked: Boolean,
-  group: String,
-  resetToken: String,
-  resetTokenExpires: Date,
-  roles: [RoleSchema],
-});
+export const UserSchema = new mongoose.Schema(
+  {
+    email: String,
+    password: String,
+    lastLogin: Date,
+    loginAttempts: { type: Number, default: 0 },
+    locked: { type: Boolean, default: false },
+    group: String,
+    resetToken: String,
+    resetTokenExpires: Date,
+    roles: [RoleSchema],
+  },
+  { timestamps: true },
+);
 
 UserSchema.pre('save', function(next) {
   // Only hash the password if the field has been modified. In other words, don't generate

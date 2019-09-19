@@ -17,6 +17,7 @@ export class GqlAuthGuard extends AuthGuard('jwt') {
         info.fieldName
       }, Args: ${JSON.stringify(args)}`,
     );
+
     return ctx.getContext().req;
   }
 }

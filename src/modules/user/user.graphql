@@ -3,15 +3,12 @@ scalar Date
 type User {
   id: ID!
   email: String!
-  group: String!
+  group: String
   createdAt: Date!
   updatedAt: Date!
   lastLogin: Date
   loginAttempts: Int!
   roles: [Role]
-  configSettings: [UserConfig]
-  loginRecords: [LoginRecord]
-  notifications: [NotificationStatus]
 }
 
 type Query {

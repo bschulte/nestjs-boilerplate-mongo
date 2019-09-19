@@ -35,23 +35,13 @@ export class UserResolver {
   }
 
   @Mutation()
-  // @Roles(roles.ADMIN)
+  @Roles(roles.ADMIN)
   async createUser(
     @Args('email') email: string,
     @Args('password') password: string,
   ) {
     return this.userService.create({ email, password });
   }
-
-  // @ResolveProperty()
-  // async roles(@Parent() user: User) {
-  //   return await this.roleService.findAll({ userId: user.id });
-  // }
-
-  // @ResolveProperty()
-  // async configSettings(@Parent() user: User) {
-  //   return await this.userConfigService.findAll({ userId: user.id });
-  // }
 
   // @ResolveProperty()
   // async loginRecords(@Parent() user: User) {
