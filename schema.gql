@@ -34,4 +34,5 @@ type User {
   loginAttempts: Float!
   roles: [Role!]!
   updatedAt: DateTime!
+  createdAt: DateTime!
 }

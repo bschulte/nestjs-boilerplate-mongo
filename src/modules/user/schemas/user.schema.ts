@@ -24,11 +24,11 @@ import { GqlRolesGuard } from 'modules/role/guards/graphqlRoles.guard';
 })
 export class User extends Typegoose {
   @Field()
+  @Authorized([roles.ADMIN])
   _id: string;
 
   @prop()
   @Field()
-  @Authorized(['testrole'])
   email: string;
 
   @prop()
@@ -58,8 +58,13 @@ export class User extends Typegoose {
   @Field(() => [Role])
   roles: Role[];
 
+  @prop()
   @Field()
   updatedAt: Date;
+
+  @prop()
+  @Field()
+  createdAt: Date;
 }
 
 export const UserModel = new User().getModelForClass(User, {

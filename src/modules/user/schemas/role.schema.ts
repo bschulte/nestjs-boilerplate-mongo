@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 import { Typegoose, prop } from 'typegoose';
-import { ObjectType, Field } from 'type-graphql';
+import { ObjectType, Field, Authorized } from 'type-graphql';
 import { roles } from 'common/constants';
 import { Roles } from 'modules/role/decorators/roles.decorator';
 
@@ -12,7 +12,7 @@ export class Role extends Typegoose {
 
   @prop()
   @Field()
-  @Roles(roles.ADMIN)
+  @Authorized([roles.ADMIN])
   enabled: boolean;
 }
 

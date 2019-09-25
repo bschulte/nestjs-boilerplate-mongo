@@ -19,6 +19,7 @@ import { TypeGraphQLBuildSchemaOptions } from 'interfaces/ITypeGraphQLBuildSchem
       playground: isDevEnv(),
       autoSchemaFile: 'schema.gql',
       context: ({ req }) => ({ req }),
+      // See: https://github.com/nestjs/graphql/issues/305
       buildSchemaOptions: { authChecker } as TypeGraphQLBuildSchemaOptions,
     }),
     TypegooseModule.forRoot('mongodb://localhost/nest-boilerplate', {
