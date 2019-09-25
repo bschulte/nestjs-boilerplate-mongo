@@ -1,12 +1,13 @@
 import { Module, forwardRef } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
+
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './jwt.strategy';
 import { AuthController } from './auth.controller';
 import { UserModule } from 'modules/user/user.module';
 import { AuthResolver } from './auth.resolver';
-// import { LoginRecordModule } from 'src/loginRecord/loginRecord.module';
+import { LoginRecordModule } from 'modules/loginRecord/loginRecord.module';
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import { AuthResolver } from './auth.resolver';
       },
     }),
     UserModule,
-    // LoginRecordModule,
+    LoginRecordModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy, AuthResolver],

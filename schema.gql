@@ -8,6 +8,12 @@ The javascript `Date` as string. Type represents date and time as the ISO Date s
 """
 scalar DateTime
 
+type LoginRecord {
+  _id: String!
+  updatedAt: DateTime!
+  createdAt: DateTime!
+}
+
 type LoginReturnDto {
   expiresIn: String!
   accessToken: String!
@@ -20,6 +26,7 @@ type Mutation {
 
 type Query {
   user: User!
+  loginRecords: LoginRecord!
 }
 
 type Role {

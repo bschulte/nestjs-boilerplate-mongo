@@ -14,7 +14,6 @@ export class LoginRecord extends Typegoose {
   _id: string;
 
   @prop()
-  @Field()
   userId: string;
 
   @prop()

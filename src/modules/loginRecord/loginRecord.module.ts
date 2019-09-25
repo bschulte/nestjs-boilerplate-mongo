@@ -11,4 +11,3 @@ import { LoginRecord } from './loginRecord.schema';
   exports: [LoginRecordService],
 })
 export class LoginRecordModule {}
-
