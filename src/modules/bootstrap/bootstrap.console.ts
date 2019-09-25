@@ -4,6 +4,12 @@ import * as prompt from 'prompts';
 import * as fs from 'fs';
 import chalk from 'chalk';
 import { moduleTemplate } from './templates/module.template';
+import { controllerTemplate } from 'modules/bootstrap/templates/controller.template';
+import { serviceTemplate } from 'modules/bootstrap/templates/service.template';
+import { schemaTemplate } from 'modules/bootstrap/templates/schema.template';
+import { resolverTemplate } from 'modules/bootstrap/templates/resolver.template';
+import { dtoTemplate } from 'modules/bootstrap/templates/dto.template';
+import { consoleTemplate } from 'modules/bootstrap/templates/console.template';
 
 @Console({
   name: 'bootstrap',
@@ -36,14 +42,24 @@ export class BootstrapConsole {
           selected: true,
         },
         {
-          title: 'GraphQL',
-          value: 'graphql',
+          title: 'Resolver',
+          value: 'resolver',
           selected: true,
         },
         {
           title: 'Schema',
           value: 'schema',
           selected: true,
+        },
+        {
+          title: 'DTO',
+          value: 'dto',
+          selected: true,
+        },
+        {
+          title: 'Console',
+          value: 'console',
+          selected: false,
         },
       ],
     });
@@ -69,8 +85,18 @@ export class BootstrapConsole {
     process.exit();
   }
 
+  /**
+   * Write the actual template file to disk.
+   */
   bootstrapFile(
-    type: 'module' | 'controller',
+    type:
+      | 'module'
+      | 'controller'
+      | 'service'
+      | 'schema'
+      | 'resolver'
+      | 'dto'
+      | 'console',
     name: string,
     className: string,
     baseDir: string,
@@ -81,6 +107,24 @@ export class BootstrapConsole {
     switch (type) {
       case 'module':
         template = moduleTemplate;
+        break;
+      case 'controller':
+        template = controllerTemplate;
+        break;
+      case 'service':
+        template = serviceTemplate;
+        break;
+      case 'schema':
+        template = schemaTemplate;
+        break;
+      case 'resolver':
+        template = resolverTemplate;
+        break;
+      case 'dto':
+        template = dtoTemplate;
+        break;
+      case 'console':
+        template = consoleTemplate;
         break;
       default:
         console.log('Invalid bootstrap file type!');
