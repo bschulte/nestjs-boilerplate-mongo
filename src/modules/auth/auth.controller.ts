@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { UserService } from 'modules/user/user.service';
 import { BackendLogger } from 'modules/logger/BackendLogger';
-import { LoginDto } from './interfaces/login.dto';
+import { LoginDto } from './dtos/login.dto';
 import { AuthService } from './auth.service';
 // import { LoginRecordService } from 'src/loginRecord/loginRecord.service';
 

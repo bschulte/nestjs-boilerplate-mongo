@@ -3,9 +3,14 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+type LoginReturnDto {
+  expiresIn: String!
+  accessToken: String!
+}
+
 type Mutation {
   createUser(password: String!, email: String!): User!
-  login(password: String!, email: String!): String!
+  login(password: String!, email: String!): LoginReturnDto!
 }
 
 type Query {

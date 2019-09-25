@@ -2,6 +2,7 @@ import { Resolver, Mutation, Args, Context } from '@nestjs/graphql';
 import { BackendLogger } from 'modules/logger/BackendLogger';
 import { AuthService } from './auth.service';
 import { UserService } from 'modules/user/user.service';
+import { LoginReturnDto } from 'modules/auth/dtos/loginReturn.dto';
 // import { LoginRecordService } from 'src/loginRecord/loginRecord.service';
 
 @Resolver('Auth')
@@ -14,7 +15,7 @@ export class AuthResolver {
     private readonly userService: UserService,
   ) {}
 
-  @Mutation(() => String)
+  @Mutation(() => LoginReturnDto)
   async login(
     @Context('req') req,
     @Args('email') email: string,
