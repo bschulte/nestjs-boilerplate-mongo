@@ -16,9 +16,10 @@ import { roles } from 'common/constants';
 // import { RoleService } from 'src/role/role.service';
 import { UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
+import { User } from 'modules/user/schemas/user.schema';
 // import { NotificationStatusService } from 'src/notificationStatus/notificationStatus.service';
 
-@Resolver('User')
+@Resolver(User)
 @UseGuards(GqlAuthGuard, GqlRolesGuard)
 export class UserResolver {
   private readonly logger = new BackendLogger(UserResolver.name);
@@ -28,13 +29,13 @@ export class UserResolver {
   // private readonly notificationStatusService: NotificationStatusService,
   constructor(private readonly userService: UserService) {}
 
-  @Query()
+  @Query(() => User)
   async user(@Context('req') { user }) {
     this.logger.debug(`Getting user info: ${user.email}`);
     return this.userService.findOneByEmail(user.email);
   }
 
-  @Mutation()
+  @Mutation(() => User)
   @Roles(roles.ADMIN)
   async createUser(
     @Args('email') email: string,

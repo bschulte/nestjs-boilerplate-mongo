@@ -5,11 +5,11 @@ import { Logger } from '@nestjs/common';
 import { REQUEST_ID, SESSION_USER } from 'common/constants';
 import { SessionMiddleware } from 'middleware/session.middleware';
 
-import { IUser } from 'modules/user/user.interface';
+import { User } from 'modules/user/schemas/user.schema';
 
 const formatter = info => {
   const requestId = SessionMiddleware.get(REQUEST_ID) || '-';
-  const user: IUser = SessionMiddleware.get(SESSION_USER);
+  const user: User = SessionMiddleware.get(SESSION_USER);
   const email = user ? user.email : '-';
 
   return `${dayjs(info.timestamp).format(
@@ -42,7 +42,7 @@ export class BackendLogger extends Logger {
         filename: 'logs/serverAll.tail.log',
         tailable: true,
         level: 'silly',
-        maxFiles: 10,
+        maxFiles: 5,
         maxsize: 5 * 1024 * 1024, // 5 MB
       }),
       new winston.transports.File({
@@ -50,7 +50,7 @@ export class BackendLogger extends Logger {
         format: winston.format.combine(winston.format.uncolorize()),
         tailable: false,
         level: 'verbose',
-        maxFiles: 10,
+        maxFiles: 30,
         maxsize: 5 * 1024 * 1024, // 5 MB
       }),
       new winston.transports.File({
@@ -58,7 +58,7 @@ export class BackendLogger extends Logger {
         format: winston.format.combine(winston.format.uncolorize()),
         tailable: false,
         level: 'silly',
-        maxFiles: 10,
+        maxFiles: 30,
         maxsize: 5 * 1024 * 1024, // 5 MB
       }),
     ],

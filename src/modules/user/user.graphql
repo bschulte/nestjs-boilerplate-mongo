@@ -14,7 +14,3 @@ type User {
 type Query {
   user: User
 }
-
-type Mutation {
-  createUser(email: String!, password: String!): User
-}

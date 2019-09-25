@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
+import { TypegooseModule } from 'nestjs-typegoose';
 import { ConsoleModule } from 'nestjs-console';
 import * as dotenv from 'dotenv';
 dotenv.config();
@@ -7,7 +7,6 @@ dotenv.config();
 import { AuthModule } from 'modules/auth/auth.module';
 import { UserModule } from 'modules/user/user.module';
 import { BootstrapModule } from 'modules/bootstrap/bootstrap.module';
-import { RoleModule } from 'modules/role/role.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { isDevEnv } from 'common/util';
 
@@ -16,10 +15,10 @@ import { isDevEnv } from 'common/util';
     ConsoleModule,
     GraphQLModule.forRoot({
       playground: isDevEnv(),
-      typePaths: ['./src/**/*.graphql'],
+      autoSchemaFile: 'schema.gql',
       context: ({ req }) => ({ req }),
     }),
-    MongooseModule.forRoot('mongodb://localhost/nest-boilerplate', {
+    TypegooseModule.forRoot('mongodb://localhost/nest-boilerplate', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     }),

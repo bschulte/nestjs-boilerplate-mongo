@@ -14,7 +14,7 @@ export class AuthResolver {
     private readonly userService: UserService,
   ) {}
 
-  @Mutation()
+  @Mutation(() => String)
   async login(
     @Context('req') req,
     @Args('email') email: string,

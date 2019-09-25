@@ -1,17 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import * as dayjs from 'dayjs';
+import { ModelType } from 'typegoose';
+import { InjectModel } from 'nestjs-typegoose';
 
-import { UserDto } from './dtos/user.dto';
+import { User, UserModel } from 'modules/user/schemas/user.schema';
 import { BackendLogger } from 'modules/logger/BackendLogger';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { IUser } from 'modules/user/user.interface';
+import { UserDto } from './dtos/user.dto';
 
 @Injectable()
 export class UserService {
   private readonly logger = new BackendLogger(UserService.name);
 
-  constructor(@InjectModel('User') private readonly userModel: Model<IUser>) {}
+  constructor(@InjectModel(User) private readonly userModel: ModelType<User>) {}
 
   async findOneByEmail(email: string) {
     return await this.userModel.findOne({ email });
@@ -25,7 +25,7 @@ export class UserService {
     return await this.userModel.find();
   }
 
-  async create(createUserDto: UserDto): Promise<IUser> {
+  async create(createUserDto: UserDto): Promise<User> {
     const newUser = new this.userModel(createUserDto);
     return await newUser.save();
   }
@@ -36,7 +36,7 @@ export class UserService {
     return await user.save();
   }
 
-  async handleInvalidPassword(user: IUser) {
+  async handleInvalidPassword(user) {
     user.loginAttempts = user.loginAttempts + 1;
 
     if (user.loginAttempts > 5) {
@@ -49,7 +49,7 @@ export class UserService {
     await user.save();
   }
 
-  async handleSuccessfulLogin(user: IUser) {
+  async handleSuccessfulLogin(user) {
     user.lastLogin = new Date(dayjs().toISOString());
     user.loginAttempts = 0;
 

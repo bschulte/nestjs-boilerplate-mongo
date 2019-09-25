@@ -5,7 +5,7 @@ import * as bcrypt from 'bcryptjs';
 import { JwtPayload } from './interfaces/jwtPayload.interface';
 import { BackendLogger } from 'modules/logger/BackendLogger';
 import { UserService } from 'modules/user/user.service';
-import { IUser } from 'modules/user/user.interface';
+import { User } from 'modules/user/schemas/user.schema';
 import { TOKEN_EXPIRES_IN } from 'common/constants';
 
 @Injectable()
@@ -58,11 +58,11 @@ export class AuthService {
     return user;
   }
 
-  validatePassword(user: IUser, password: string): boolean {
+  validatePassword(user: User, password: string): boolean {
     return bcrypt.compareSync(password, user.password);
   }
 
-  async createToken(user: IUser) {
+  async createToken(user: User) {
     const accessToken = this.jwtService.sign({
       email: user.email,
     });
