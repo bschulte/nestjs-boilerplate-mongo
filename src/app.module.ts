@@ -7,8 +7,10 @@ dotenv.config();
 import { AuthModule } from 'modules/auth/auth.module';
 import { UserModule } from 'modules/user/user.module';
 import { BootstrapModule } from 'modules/bootstrap/bootstrap.module';
+import { authChecker } from 'modules/auth/guards/graphqlAuthChecker';
 import { GraphQLModule } from '@nestjs/graphql';
 import { isDevEnv } from 'common/util';
+import { TypeGraphQLBuildSchemaOptions } from 'interfaces/ITypeGraphQLBuildSchemaOptions';
 
 @Module({
   imports: [
@@ -17,6 +19,7 @@ import { isDevEnv } from 'common/util';
       playground: isDevEnv(),
       autoSchemaFile: 'schema.gql',
       context: ({ req }) => ({ req }),
+      buildSchemaOptions: { authChecker } as TypeGraphQLBuildSchemaOptions,
     }),
     TypegooseModule.forRoot('mongodb://localhost/nest-boilerplate', {
       useNewUrlParser: true,

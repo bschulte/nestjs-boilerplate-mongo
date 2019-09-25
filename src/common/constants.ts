@@ -1,5 +1,5 @@
 export const roles = {
-  ADMIN: 'ADMIN'
+  ADMIN: 'ADMIN',
 };
 
 export const EMM_NAMESPACE = 'emm-namespace';

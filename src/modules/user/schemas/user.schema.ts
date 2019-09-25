@@ -1,9 +1,13 @@
 import * as mongoose from 'mongoose';
 import * as bcryptjs from 'bcryptjs';
 import { Typegoose, prop, pre } from 'typegoose';
-import { ObjectType, Field } from 'type-graphql';
+import { ObjectType, Field, Authorized } from 'type-graphql';
+import { UseGuards } from '@nestjs/common';
 
 import { Role } from 'modules/user/schemas/role.schema';
+import { roles } from 'common/constants';
+import { Roles } from 'modules/role/decorators/roles.decorator';
+import { GqlRolesGuard } from 'modules/role/guards/graphqlRoles.guard';
 
 @ObjectType()
 @pre<User>('save', function(next) {
@@ -19,18 +23,22 @@ import { Role } from 'modules/user/schemas/role.schema';
   next();
 })
 export class User extends Typegoose {
-  id: string;
+  @Field()
+  _id: string;
 
   @prop()
   @Field()
+  @Authorized(['testrole'])
   email: string;
 
   @prop()
   password: string;
 
   @prop()
+  @Field()
   lastLogin: Date;
 
+  @Field()
   @prop({ default: 0 })
   loginAttempts: number;
 
@@ -49,6 +57,9 @@ export class User extends Typegoose {
   @prop()
   @Field(() => [Role])
   roles: Role[];
+
+  @Field()
+  updatedAt: Date;
 }
 
 export const UserModel = new User().getModelForClass(User, {

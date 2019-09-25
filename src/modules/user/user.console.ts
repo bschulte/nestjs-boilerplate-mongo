@@ -29,7 +29,7 @@ export class UserConsole {
 
     const user = await this.userService.create({ email, password });
 
-    console.log(`User is created, new id: ${chalk.green(user.id)}`);
+    console.log(`User is created, new id: ${chalk.green(user._id)}`);
 
     process.exit();
   }

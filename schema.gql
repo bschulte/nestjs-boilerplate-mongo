@@ -3,6 +3,11 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+"""
+The javascript `Date` as string. Type represents date and time as the ISO Date string.
+"""
+scalar DateTime
+
 type LoginReturnDto {
   expiresIn: String!
   accessToken: String!
@@ -19,9 +24,14 @@ type Query {
 
 type Role {
   name: String!
+  enabled: Boolean!
 }
 
 type User {
+  _id: String!
   email: String!
+  lastLogin: DateTime!
+  loginAttempts: Float!
   roles: [Role!]!
+  updatedAt: DateTime!
 }
