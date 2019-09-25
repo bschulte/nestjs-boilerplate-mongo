@@ -44,13 +44,18 @@ export class UserResolver {
     return this.userService.create({ email, password });
   }
 
-  // @ResolveProperty()
-  // async loginRecords(@Parent() user: User) {
-  //   return await this.loginRecordService.findAll({ userId: user.id });
-  // }
+  @Mutation(() => User)
+  @Roles(roles.ADMIN)
+  async addRole(@Args('userId') userId: string, @Args('role') role: string) {
+    return this.userService.addRole(userId, role);
+  }
 
-  // @ResolveProperty()
-  // async notifications(@Parent() user: User) {
-  //   return await this.notificationStatusService.findAll(user.id);
-  // }
+  @Mutation(() => User)
+  @Roles(roles.ADMIN)
+  async disabledRole(
+    @Args('userId') userId: string,
+    @Args('role') role: string,
+  ) {
+    return this.userService.disableRole(userId, role);
+  }
 }

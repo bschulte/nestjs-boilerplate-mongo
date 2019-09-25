@@ -11,6 +11,7 @@
     "start:dev": "tsc-watch -p tsconfig.build.json --onSuccess \"node -r ./tsconfig-paths-bootstrap.js -r source-map-support/register dist/main.js\"",
     "dev": "npm run start:dev",
     "start:debug": "tsc-watch -p tsconfig.build.json --onSuccess \"node --inspect-brk -r ./tsconfig-paths-bootstrap.js dist/main.js\"",
+    "debug": "npm run start:debug",
     "start:prod": "node -r ./tsconfig-paths-bootstrap.js dist/main.js",
     "console": "node -r ./tsconfig-paths-bootstrap.js dist/console.js",
     "console:dev": "ts-node -r tsconfig-paths/register src/console.ts",

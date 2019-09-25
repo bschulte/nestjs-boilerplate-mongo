@@ -21,6 +21,8 @@ type LoginReturnDto {
 
 type Mutation {
   createUser(password: String!, email: String!): User!
+  addRole(role: String!, userId: String!): User!
+  disabledRole(role: String!, userId: String!): User!
   login(password: String!, email: String!): LoginReturnDto!
 }
 
@@ -40,6 +42,7 @@ type User {
   lastLogin: DateTime!
   loginAttempts: Float!
   roles: [Role!]!
+  loginRecords: [LoginRecord!]!
   updatedAt: DateTime!
   createdAt: DateTime!
 }

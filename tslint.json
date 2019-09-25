@@ -15,6 +15,7 @@
     "quotemark": false,
     "interface-name": [false],
     "arrow-parens": false,
+    "object-literal-key-quotes": false,
     "variable-name": false,
     "no-console": false,
     "object-literal-sort-keys": false

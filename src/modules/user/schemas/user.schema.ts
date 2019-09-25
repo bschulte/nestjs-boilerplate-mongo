@@ -8,6 +8,7 @@ import { Role } from 'modules/user/schemas/role.schema';
 import { roles } from 'common/constants';
 import { Roles } from 'modules/role/decorators/roles.decorator';
 import { GqlRolesGuard } from 'modules/role/guards/graphqlRoles.guard';
+import { LoginRecord } from 'modules/loginRecord/loginRecord.schema';
 
 @ObjectType()
 @pre<User>('save', function(next) {
@@ -57,6 +58,10 @@ export class User extends Typegoose {
   @prop()
   @Field(() => [Role])
   roles: Role[];
+
+  @prop()
+  @Field(() => [LoginRecord])
+  loginRecords: LoginRecord[];
 
   @prop()
   @Field()
