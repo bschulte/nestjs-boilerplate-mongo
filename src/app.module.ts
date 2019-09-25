@@ -7,7 +7,7 @@ dotenv.config();
 import { AuthModule } from 'modules/auth/auth.module';
 import { UserModule } from 'modules/user/user.module';
 import { BootstrapModule } from 'modules/bootstrap/bootstrap.module';
-import { authChecker } from 'modules/auth/guards/graphqlAuthChecker';
+import { authChecker } from 'modules/auth/guards/typegraphqlAuthChecker';
 import { GraphQLModule } from '@nestjs/graphql';
 import { isDevEnv } from 'common/util';
 import { TypeGraphQLBuildSchemaOptions } from 'interfaces/ITypeGraphQLBuildSchemaOptions';
