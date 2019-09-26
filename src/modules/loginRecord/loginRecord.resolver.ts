@@ -7,7 +7,6 @@ import {
   ResolveProperty,
   Resolver,
 } from '@nestjs/graphql';
-import { Ctx } from 'type-graphql';
 import { BackendLogger } from 'modules/logger/BackendLogger';
 import { GqlAuthGuard } from 'modules/auth/guards/graphqlAuth.guard';
 import { GqlRolesGuard } from 'modules/role/guards/graphqlRoles.guard';
@@ -25,8 +24,8 @@ export class LoginRecordResolver {
 
   constructor(private readonly loginRecordService: LoginRecordService) {}
 
-  @Query(() => LoginRecord)
-  async loginRecords(@Ctx('req') { user }: { user: User }) {
-    return this.loginRecordService.findAll(user._id);
+  @Query(() => [LoginRecord])
+  async loginRecords(@Context('req') { user }: { user: User }) {
+    return this.loginRecordService.findAllByUserId(user._id);
   }
 }

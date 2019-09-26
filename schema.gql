@@ -10,6 +10,12 @@ scalar DateTime
 
 type LoginRecord {
   _id: String!
+  country: String!
+  city: String!
+  region: String!
+  lat: Float!
+  long: Float!
+  ip: String!
   updatedAt: DateTime!
   createdAt: DateTime!
 }
@@ -28,7 +34,7 @@ type Mutation {
 
 type Query {
   user: User!
-  loginRecords: LoginRecord!
+  loginRecords: [LoginRecord!]!
 }
 
 type Role {

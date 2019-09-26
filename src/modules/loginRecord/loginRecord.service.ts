@@ -18,8 +18,11 @@ export class LoginRecordService {
     private readonly loginRecordModel: ModelType<LoginRecord>,
   ) {}
 
-  async findAll(userId: string) {
-    return await this.loginRecordModel.find({ userId });
+  async findAllByUserId(userId: string) {
+    this.logger.log(`Finding login records by id: ${userId}`);
+    const records = await this.loginRecordModel.find({ userId });
+    console.log('Records:', records);
+    return records;
   }
 
   async create(ip: string, userId: string): Promise<LoginRecord | null> {

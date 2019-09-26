@@ -17,21 +17,27 @@ export class LoginRecord extends Typegoose {
   userId: string;
 
   @prop()
+  @Field()
   country: string;
 
   @prop()
+  @Field()
   city: string;
 
   @prop()
+  @Field()
   region: string;
 
   @prop()
+  @Field()
   lat: number;
 
   @prop()
+  @Field()
   long: number;
 
   @prop()
+  @Field()
   ip: string;
 
   @prop()

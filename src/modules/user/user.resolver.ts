@@ -10,13 +10,14 @@ import {
 import { BackendLogger } from 'modules/logger/BackendLogger';
 import { GqlAuthGuard } from 'modules/auth/guards/graphqlAuth.guard';
 import { GqlRolesGuard } from 'modules/role/guards/graphqlRoles.guard';
-// import { LoginRecordService } from 'src/loginRecord/loginRecord.service';
 import { Roles } from 'modules/role/decorators/roles.decorator';
 import { roles } from 'common/constants';
-// import { RoleService } from 'src/role/role.service';
 import { UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from 'modules/user/schemas/user.schema';
+import { FieldResolver } from 'type-graphql';
+import { LoginRecord } from 'modules/loginRecord/loginRecord.schema';
+import { LoginRecordService } from 'modules/loginRecord/loginRecord.service';
 // import { NotificationStatusService } from 'src/notificationStatus/notificationStatus.service';
 
 @Resolver(User)
@@ -24,10 +25,11 @@ import { User } from 'modules/user/schemas/user.schema';
 export class UserResolver {
   private readonly logger = new BackendLogger(UserResolver.name);
 
-  // private readonly roleService: RoleService,
-  // private readonly loginRecordService: LoginRecordService,
   // private readonly notificationStatusService: NotificationStatusService,
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly loginRecordService: LoginRecordService,
+  ) {}
 
   @Query(() => User)
   async user(@Context('req') { user }) {
@@ -57,5 +59,11 @@ export class UserResolver {
     @Args('role') role: string,
   ) {
     return this.userService.disableRole(userId, role);
+  }
+
+  @ResolveProperty(() => [LoginRecord])
+  async loginRecords(@Parent() user: User) {
+    this.logger.log(`Resolving login records for user: ${user.email}`);
+    return await this.loginRecordService.findAllByUserId(user._id);
   }
 }
