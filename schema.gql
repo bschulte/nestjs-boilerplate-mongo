@@ -26,7 +26,7 @@ type LoginReturnDto {
 }
 
 type Mutation {
-  createUser(password: String!, email: String!): User!
+  createUser(email: String!, password: String!): User!
   addRole(role: String!, userId: String!): User!
   disabledRole(role: String!, userId: String!): User!
   login(password: String!, email: String!): LoginReturnDto!

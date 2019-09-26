@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 
 import { BackendLogger } from 'modules/logger/BackendLogger';
-import { UserDto } from './dtos/user.dto';
+import { CreateUserDto } from './dtos/createUser.dto';
 import { UserService } from './user.service';
 import { RolesGuard } from 'modules/role/guards/roles.guard';
 import { roles } from 'common/constants';
@@ -25,7 +25,7 @@ export class UserController {
   @Post()
   @Roles(roles.ADMIN)
   @UseGuards(JwtAuthGuard)
-  async createUser(@Body(new ValidationPipe()) createUserDto: UserDto) {
+  async createUser(@Body(new ValidationPipe()) createUserDto: CreateUserDto) {
     this.logger.log(`Creating new user: ${createUserDto.email}`);
     return await this.userService.create(createUserDto);
   }

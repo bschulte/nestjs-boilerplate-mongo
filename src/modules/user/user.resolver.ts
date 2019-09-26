@@ -18,6 +18,7 @@ import { User } from 'modules/user/schemas/user.schema';
 import { FieldResolver } from 'type-graphql';
 import { LoginRecord } from 'modules/loginRecord/loginRecord.schema';
 import { LoginRecordService } from 'modules/loginRecord/loginRecord.service';
+import { CreateUserDto } from 'modules/user/dtos/createUser.dto';
 // import { NotificationStatusService } from 'src/notificationStatus/notificationStatus.service';
 
 @Resolver(User)
@@ -39,10 +40,7 @@ export class UserResolver {
 
   @Mutation(() => User)
   @Roles(roles.ADMIN)
-  async createUser(
-    @Args('email') email: string,
-    @Args('password') password: string,
-  ) {
+  async createUser(@Args() { email, password }: CreateUserDto) {
     return this.userService.create({ email, password });
   }
 

@@ -5,7 +5,7 @@ import { InjectModel } from 'nestjs-typegoose';
 
 import { User, UserModel } from 'modules/user/schemas/user.schema';
 import { BackendLogger } from 'modules/logger/BackendLogger';
-import { UserDto } from './dtos/user.dto';
+import { CreateUserDto } from './dtos/createUser.dto';
 import { RoleModel, Role } from 'modules/user/schemas/role.schema';
 
 @Injectable()
@@ -29,7 +29,7 @@ export class UserService {
     return await this.userModel.find();
   }
 
-  async create(createUserDto: UserDto): Promise<User> {
+  async create(createUserDto: CreateUserDto): Promise<User> {
     const newUser = new this.userModel(createUserDto);
     return await newUser.save();
   }
