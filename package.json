@@ -40,7 +40,7 @@
     "apollo-server-express": "^2.9.3",
     "bcryptjs": "^2.4.3",
     "chalk": "^2.4.2",
-    "class-transformer": "^0.2.3",
+    "class-transformer": "^0.3.1",
     "class-validator": "^0.10.0",
     "cls-hooked": "^4.2.2",
     "commander": "^3.0.1",
